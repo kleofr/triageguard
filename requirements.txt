@@ -1,0 +1,34 @@
+# Core Orchestration & Router
+langgraph>=0.2.0
+laya>=0.1.0
+
+# API & Serving
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+httpx>=0.27.0
+
+# Validation, Settings & Environment
+pydantic>=2.8.0
+pydantic-settings>=2.4.0
+python-dotenv>=1.0.0
+
+# Database & Persistence
+supabase>=2.13.0
+
+# LLM Providers & Tooling (OpenRouter)
+openrouter>=1.3.0
+
+# Numerical Computing & Evaluation
+numpy>=1.26.0
+
+# ML Security Models & Inference
+transformers>=4.40.0
+torch>=2.2.0
+
+# Testing, Quality & Security Tools
+pytest>=8.3.0
+pytest-asyncio>=0.24.0
+ruff>=0.6.0
+mypy>=1.11.0
+pip-audit>=2.7.0
+

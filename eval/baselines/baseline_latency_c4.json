@@ -1,0 +1,1836 @@
+{
+  "timestamp": "2026-10-08T12:13:02.908841+00:00",
+  "concurrency": 4,
+  "endpoint": "http://localhost:8000/api/v1/triage",
+  "device": "cpu",
+  "detector_mode": "model",
+  "model_id": "meta-llama/Llama-Prompt-Guard-2-86M",
+  "revision": "a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+  "dataset": {
+    "csv_path": "backend/tests/test_ticket_data_labeled.csv",
+    "total_tickets_sent": 50,
+    "warmup_requests_excluded": 3,
+    "benchmarked_requests": 47,
+    "successful_requests": 47,
+    "failed_requests": 0
+  },
+  "wall_clock_duration_seconds": 47.31,
+  "summary": {
+    "client_e2e_latency_ms": {
+      "count": 47,
+      "p50": 3456.8,
+      "p95": 6131.85,
+      "p99": 6814.55,
+      "mean": 3876.11,
+      "min": 1378.14,
+      "max": 6814.76
+    },
+    "trace_nodes_ms": {
+      "route_with_laya": {
+        "count": 39,
+        "p50": 1006.04,
+        "p95": 1227.44,
+        "p99": 1260.09,
+        "mean": 1045.0,
+        "min": 938.22,
+        "max": 1264.53
+      },
+      "sanitize_and_guard": {
+        "count": 47,
+        "p50": 132.37,
+        "p95": 151.24,
+        "p99": 180.83,
+        "mean": 135.88,
+        "min": 122.19,
+        "max": 192.56
+      }
+    }
+  },
+  "raw_samples": [
+    {
+      "elapsed_ms": 1378.14,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:15.589932+00:00",
+          "duration_ms": 146.772,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:15.737630+00:00",
+          "duration_ms": 1224.614,
+          "summary": {
+            "category": "shipping_delivery",
+            "category_conf": 0.867,
+            "urgency": "high",
+            "urgency_conf": 0.5026,
+            "team": "logistics"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 1548.71,
+      "status_code": 200,
+      "route": "SECURITY_REVIEW",
+      "route_reason": "Quarantined for security review: classifier score 0.9992 >= high threshold 0.8000",
+      "risk_flags": [
+        "PROMPT_INJECTION_INSTRUCTION_OVERRIDE_CRITICAL",
+        "PROMPT_INJECTION_PROMPT_EXFILTRATION_HIGH",
+        "injection_suspected",
+        "PROMPT_GUARD_MALICIOUS"
+      ],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:16.965791+00:00",
+          "duration_ms": 167.059,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [
+              "PROMPT_INJECTION_INSTRUCTION_OVERRIDE_CRITICAL",
+              "PROMPT_INJECTION_PROMPT_EXFILTRATION_HIGH",
+              "injection_suspected",
+              "PROMPT_GUARD_MALICIOUS"
+            ],
+            "has_regex_high": true,
+            "guard_score": 0.9992,
+            "guard_tier": "SECURITY_REVIEW",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "SECURITY_REVIEW"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 4153.12,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:18.472468+00:00",
+          "duration_ms": 142.024,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:18.615323+00:00",
+          "duration_ms": 1122.324,
+          "summary": {
+            "category": "billing",
+            "category_conf": 0.4354,
+            "urgency": "normal",
+            "urgency_conf": 0.437,
+            "team": "billing team"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 2884.64,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:17.136383+00:00",
+          "duration_ms": 136.663,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0004,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:17.273937+00:00",
+          "duration_ms": 1195.919,
+          "summary": {
+            "category": "technical_issue",
+            "category_conf": 0.6533,
+            "urgency": "high",
+            "urgency_conf": 0.7497,
+            "team": "tech support"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 5579.6,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:21.124676+00:00",
+          "duration_ms": 152.031,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:21.277556+00:00",
+          "duration_ms": 1264.53,
+          "summary": {
+            "category": "shipping_delivery",
+            "category_conf": 0.9166,
+            "urgency": "high",
+            "urgency_conf": 0.6009,
+            "team": "logistics"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 3988.45,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:19.741054+00:00",
+          "duration_ms": 192.56,
+          "summary": {
+            "pii_masked": 1,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0016,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:19.934541+00:00",
+          "duration_ms": 1187.528,
+          "summary": {
+            "category": "billing",
+            "category_conf": 0.7709,
+            "urgency": "high",
+            "urgency_conf": 0.5032,
+            "team": "billing team"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 4216.37,
+      "status_code": 200,
+      "route": "SECURITY_REVIEW",
+      "route_reason": "Quarantined for security review: classifier score 0.9991 >= high threshold 0.8000",
+      "risk_flags": [
+        "PROMPT_INJECTION_INSTRUCTION_OVERRIDE_CRITICAL",
+        "injection_suspected",
+        "PROMPT_GUARD_MALICIOUS"
+      ],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:22.544828+00:00",
+          "duration_ms": 141.104,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [
+              "PROMPT_INJECTION_INSTRUCTION_OVERRIDE_CRITICAL",
+              "injection_suspected",
+              "PROMPT_GUARD_MALICIOUS"
+            ],
+            "has_regex_high": true,
+            "guard_score": 0.9991,
+            "guard_tier": "SECURITY_REVIEW",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "SECURITY_REVIEW"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 6814.76,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:25.423077+00:00",
+          "duration_ms": 129.172,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:25.553072+00:00",
+          "duration_ms": 999.762,
+          "summary": {
+            "category": "technical_issue",
+            "category_conf": 0.77,
+            "urgency": "high",
+            "urgency_conf": 0.8417,
+            "team": "tech support"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 2962.81,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:22.689286+00:00",
+          "duration_ms": 141.687,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:22.831802+00:00",
+          "duration_ms": 1252.846,
+          "summary": {
+            "category": "billing",
+            "category_conf": 0.9308,
+            "urgency": "normal",
+            "urgency_conf": 0.4525,
+            "team": "billing team"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 2878.24,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:24.087225+00:00",
+          "duration_ms": 140.812,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0004,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:24.228868+00:00",
+          "duration_ms": 1191.693,
+          "summary": {
+            "category": "shipping_delivery",
+            "category_conf": 0.6084,
+            "urgency": "high",
+            "urgency_conf": 0.5782,
+            "team": "logistics"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 6211.07,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:27.818575+00:00",
+          "duration_ms": 130.184,
+          "summary": {
+            "pii_masked": 2,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0039,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:27.949587+00:00",
+          "duration_ms": 946.948,
+          "summary": {
+            "category": "billing",
+            "category_conf": 0.9554,
+            "urgency": "high",
+            "urgency_conf": 0.6415,
+            "team": "billing team"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 2603.68,
+      "status_code": 200,
+      "route": "SECURITY_REVIEW",
+      "route_reason": "Quarantined for security review: classifier score 0.8744 >= high threshold 0.8000",
+      "risk_flags": [
+        "PROMPT_GUARD_MALICIOUS"
+      ],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:26.555895+00:00",
+          "duration_ms": 132.368,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [
+              "PROMPT_GUARD_MALICIOUS"
+            ],
+            "has_regex_high": false,
+            "guard_score": 0.8744,
+            "guard_tier": "SECURITY_REVIEW",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "SECURITY_REVIEW"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 2395.32,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:26.691299+00:00",
+          "duration_ms": 122.372,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:26.814476+00:00",
+          "duration_ms": 1001.501,
+          "summary": {
+            "category": "billing",
+            "category_conf": 0.3017,
+            "urgency": "high",
+            "urgency_conf": 0.6492,
+            "team": "billing team"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 4824.0,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:30.115720+00:00",
+          "duration_ms": 131.392,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:30.247860+00:00",
+          "duration_ms": 1129.072,
+          "summary": {
+            "category": "billing",
+            "category_conf": 0.8781,
+            "urgency": "normal",
+            "urgency_conf": 0.4488,
+            "team": "billing team"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 3293.12,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:28.900379+00:00",
+          "duration_ms": 128.706,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0004,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:29.029919+00:00",
+          "duration_ms": 951.955,
+          "summary": {
+            "category": "shipping_delivery",
+            "category_conf": 0.6515,
+            "urgency": "high",
+            "urgency_conf": 0.5226,
+            "team": "logistics"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 2297.01,
+      "status_code": 200,
+      "route": "SECURITY_REVIEW",
+      "route_reason": "Quarantined for security review: classifier score 0.9802 >= high threshold 0.8000",
+      "risk_flags": [
+        "PROMPT_INJECTION_CODE_EXPLOIT_HIGH",
+        "injection_suspected",
+        "PROMPT_GUARD_MALICIOUS"
+      ],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:29.984319+00:00",
+          "duration_ms": 128.424,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [
+              "PROMPT_INJECTION_CODE_EXPLOIT_HIGH",
+              "injection_suspected",
+              "PROMPT_GUARD_MALICIOUS"
+            ],
+            "has_regex_high": true,
+            "guard_score": 0.9802,
+            "guard_tier": "SECURITY_REVIEW",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "SECURITY_REVIEW"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 5947.0,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:33.710969+00:00",
+          "duration_ms": 133.223,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0009,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:33.845036+00:00",
+          "duration_ms": 999.464,
+          "summary": {
+            "category": "other",
+            "category_conf": 0.3938,
+            "urgency": "high",
+            "urgency_conf": 0.4342,
+            "team": "general support"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 2543.46,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:31.379807+00:00",
+          "duration_ms": 142.727,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 1,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0007,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:31.523353+00:00",
+          "duration_ms": 1001.985,
+          "summary": {
+            "category": "technical_issue",
+            "category_conf": 0.7357,
+            "urgency": "high",
+            "urgency_conf": 0.6307,
+            "team": "tech support"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 3595.11,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:32.527943+00:00",
+          "duration_ms": 142.448,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0004,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:32.671228+00:00",
+          "duration_ms": 1037.013,
+          "summary": {
+            "category": "billing",
+            "category_conf": 0.9198,
+            "urgency": "high",
+            "urgency_conf": 0.5391,
+            "team": "billing team"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 5864.76,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:36.115318+00:00",
+          "duration_ms": 131.517,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:36.247541+00:00",
+          "duration_ms": 994.279,
+          "summary": {
+            "category": "shipping_delivery",
+            "category_conf": 0.6505,
+            "urgency": "high",
+            "urgency_conf": 0.5807,
+            "team": "logistics"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 3456.8,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:34.847281+00:00",
+          "duration_ms": 128.82,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0006,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:34.976918+00:00",
+          "duration_ms": 1005.346,
+          "summary": {
+            "category": "abuse_security",
+            "category_conf": 0.2678,
+            "urgency": "high",
+            "urgency_conf": 0.6049,
+            "team": "account security"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 2404.23,
+      "status_code": 200,
+      "route": "HUMAN_QUEUE",
+      "route_reason": "Routed to human queue: classifier score 0.4222 in ambiguous middle zone [0.4000, 0.8000)",
+      "risk_flags": [
+        "PROMPT_GUARD_AMBIGUOUS"
+      ],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:35.984960+00:00",
+          "duration_ms": 127.311,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [
+              "PROMPT_GUARD_AMBIGUOUS"
+            ],
+            "has_regex_high": false,
+            "guard_score": 0.4222,
+            "guard_tier": "HUMAN_QUEUE",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "HUMAN_QUEUE"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 5843.79,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:39.621919+00:00",
+          "duration_ms": 125.864,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0004,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:39.748630+00:00",
+          "duration_ms": 939.817,
+          "summary": {
+            "category": "technical_issue",
+            "category_conf": 0.7237,
+            "urgency": "high",
+            "urgency_conf": 0.753,
+            "team": "tech support"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 2464.65,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:37.244583+00:00",
+          "duration_ms": 131.55,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0006,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:37.376963+00:00",
+          "duration_ms": 1069.948,
+          "summary": {
+            "category": "billing",
+            "category_conf": 0.9254,
+            "urgency": "high",
+            "urgency_conf": 0.6244,
+            "team": "billing team"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 3506.46,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:38.449482+00:00",
+          "duration_ms": 145.328,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:38.595817+00:00",
+          "duration_ms": 1023.374,
+          "summary": {
+            "category": "shipping_delivery",
+            "category_conf": 0.8009,
+            "urgency": "high",
+            "urgency_conf": 0.4324,
+            "team": "logistics"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 5889.79,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:41.887482+00:00",
+          "duration_ms": 143.134,
+          "summary": {
+            "pii_masked": 1,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0013,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:42.031507+00:00",
+          "duration_ms": 1100.237,
+          "summary": {
+            "category": "abuse_security",
+            "category_conf": 0.3496,
+            "urgency": "high",
+            "urgency_conf": 0.649,
+            "team": "account security"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 2374.09,
+      "status_code": 200,
+      "route": "SECURITY_REVIEW",
+      "route_reason": "Quarantined for security review: classifier score 0.9994 >= high threshold 0.8000",
+      "risk_flags": [
+        "PROMPT_GUARD_MALICIOUS"
+      ],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:40.691293+00:00",
+          "duration_ms": 129.426,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [
+              "PROMPT_GUARD_MALICIOUS"
+            ],
+            "has_regex_high": false,
+            "guard_score": 0.9994,
+            "guard_tier": "SECURITY_REVIEW",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "SECURITY_REVIEW"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 2265.67,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:40.823728+00:00",
+          "duration_ms": 122.19,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:40.946606+00:00",
+          "duration_ms": 938.223,
+          "summary": {
+            "category": "technical_issue",
+            "category_conf": 0.5674,
+            "urgency": "high",
+            "urgency_conf": 0.6867,
+            "team": "tech support"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 5816.62,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:45.403079+00:00",
+          "duration_ms": 124.897,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:45.528813+00:00",
+          "duration_ms": 976.279,
+          "summary": {
+            "category": "billing",
+            "category_conf": 0.8007,
+            "urgency": "normal",
+            "urgency_conf": 0.4828,
+            "team": "billing team"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 3505.22,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:43.134572+00:00",
+          "duration_ms": 135.587,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:43.271077+00:00",
+          "duration_ms": 1055.327,
+          "summary": {
+            "category": "shipping_delivery",
+            "category_conf": 0.8114,
+            "urgency": "high",
+            "urgency_conf": 0.617,
+            "team": "logistics"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 3515.33,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:44.328750+00:00",
+          "duration_ms": 123.722,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:44.453338+00:00",
+          "duration_ms": 947.156,
+          "summary": {
+            "category": "abuse_security",
+            "category_conf": 0.3748,
+            "urgency": "high",
+            "urgency_conf": 0.4645,
+            "team": "account security"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 6814.31,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:48.859331+00:00",
+          "duration_ms": 130.044,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0006,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:48.990233+00:00",
+          "duration_ms": 955.923,
+          "summary": {
+            "category": "other",
+            "category_conf": 0.3319,
+            "urgency": "normal",
+            "urgency_conf": 0.5474,
+            "team": "general support"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 3385.37,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:46.508037+00:00",
+          "duration_ms": 132.575,
+          "summary": {
+            "pii_masked": 1,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:46.641461+00:00",
+          "duration_ms": 1070.352,
+          "summary": {
+            "category": "billing",
+            "category_conf": 0.8984,
+            "urgency": "high",
+            "urgency_conf": 0.5365,
+            "team": "billing team"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 3456.33,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:47.714453+00:00",
+          "duration_ms": 132.126,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0004,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:47.847480+00:00",
+          "duration_ms": 1009.193,
+          "summary": {
+            "category": "shipping_delivery",
+            "category_conf": 0.4607,
+            "urgency": "high",
+            "urgency_conf": 0.4882,
+            "team": "logistics"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 5901.6,
+      "status_code": 200,
+      "route": "SECURITY_REVIEW",
+      "route_reason": "Quarantined for security review: regex HIGH/CRITICAL injection detected",
+      "risk_flags": [
+        "PROMPT_INJECTION_INSTRUCTION_OVERRIDE_CRITICAL",
+        "PROMPT_INJECTION_JAILBREAK_ROLEPLAY_HIGH",
+        "injection_suspected"
+      ],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:52.257008+00:00",
+          "duration_ms": 149.388,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [
+              "PROMPT_INJECTION_INSTRUCTION_OVERRIDE_CRITICAL",
+              "PROMPT_INJECTION_JAILBREAK_ROLEPLAY_HIGH",
+              "injection_suspected"
+            ],
+            "has_regex_high": true,
+            "guard_score": 0.0012,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "SECURITY_REVIEW"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 3366.2,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:49.949014+00:00",
+          "duration_ms": 139.133,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:50.089070+00:00",
+          "duration_ms": 988.942,
+          "summary": {
+            "category": "technical_issue",
+            "category_conf": 0.6622,
+            "urgency": "high",
+            "urgency_conf": 0.5449,
+            "team": "tech support"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 3397.57,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:51.080604+00:00",
+          "duration_ms": 132.313,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0006,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:51.213719+00:00",
+          "duration_ms": 1040.569,
+          "summary": {
+            "category": "billing",
+            "category_conf": 0.9355,
+            "urgency": "high",
+            "urgency_conf": 0.3787,
+            "team": "billing team"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 5855.8,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:54.665881+00:00",
+          "duration_ms": 136.31,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0006,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:54.803075+00:00",
+          "duration_ms": 999.035,
+          "summary": {
+            "category": "shipping_delivery",
+            "category_conf": 0.794,
+            "urgency": "high",
+            "urgency_conf": 0.5115,
+            "team": "logistics"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 2442.65,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:52.409768+00:00",
+          "duration_ms": 128.326,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0006,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:52.538933+00:00",
+          "duration_ms": 981.962,
+          "summary": {
+            "category": "technical_issue",
+            "category_conf": 0.7988,
+            "urgency": "high",
+            "urgency_conf": 0.7894,
+            "team": "tech support"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 2408.79,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:53.523281+00:00",
+          "duration_ms": 133.135,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0006,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:53.657250+00:00",
+          "duration_ms": 1006.036,
+          "summary": {
+            "category": "abuse_security",
+            "category_conf": 0.4134,
+            "urgency": "high",
+            "urgency_conf": 0.5833,
+            "team": "account security"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 5905.72,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:57.222952+00:00",
+          "duration_ms": 125.095,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:57.348751+00:00",
+          "duration_ms": 963.791,
+          "summary": {
+            "category": "billing",
+            "category_conf": 0.7729,
+            "urgency": "high",
+            "urgency_conf": 0.5395,
+            "team": "billing team"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 3560.54,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:55.805014+00:00",
+          "duration_ms": 133.78,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0004,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:55.939634+00:00",
+          "duration_ms": 1141.702,
+          "summary": {
+            "category": "shipping_delivery",
+            "category_conf": 0.617,
+            "urgency": "normal",
+            "urgency_conf": 0.5332,
+            "team": "logistics"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 2556.98,
+      "status_code": 200,
+      "route": "SECURITY_REVIEW",
+      "route_reason": "Quarantined for security review: regex HIGH/CRITICAL injection detected",
+      "risk_flags": [
+        "PROMPT_INJECTION_INSTRUCTION_OVERRIDE_CRITICAL",
+        "PROMPT_INJECTION_INSTRUCTION_OVERRIDE_HIGH",
+        "PROMPT_INJECTION_JAILBREAK_ROLEPLAY_HIGH",
+        "injection_suspected"
+      ],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:57.084082+00:00",
+          "duration_ms": 136.012,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [
+              "PROMPT_INJECTION_INSTRUCTION_OVERRIDE_CRITICAL",
+              "PROMPT_INJECTION_INSTRUCTION_OVERRIDE_HIGH",
+              "PROMPT_INJECTION_JAILBREAK_ROLEPLAY_HIGH",
+              "injection_suspected"
+            ],
+            "has_regex_high": true,
+            "guard_score": 0.3454,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "SECURITY_REVIEW"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 5913.29,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:13:00.503070+00:00",
+          "duration_ms": 135.116,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:13:00.639014+00:00",
+          "duration_ms": 1076.232,
+          "summary": {
+            "category": "technical_issue",
+            "category_conf": 0.5667,
+            "urgency": "high",
+            "urgency_conf": 0.4125,
+            "team": "tech support"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 2328.65,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:58.315153+00:00",
+          "duration_ms": 131.593,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:58.447582+00:00",
+          "duration_ms": 962.612,
+          "summary": {
+            "category": "billing",
+            "category_conf": 0.7867,
+            "urgency": "high",
+            "urgency_conf": 0.6179,
+            "team": "billing team"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 3280.02,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:12:59.412754+00:00",
+          "duration_ms": 130.012,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0005,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:12:59.543729+00:00",
+          "duration_ms": 956.679,
+          "summary": {
+            "category": "billing",
+            "category_conf": 0.4764,
+            "urgency": "high",
+            "urgency_conf": 0.6187,
+            "team": "billing team"
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "elapsed_ms": 4581.18,
+      "status_code": 200,
+      "route": null,
+      "route_reason": null,
+      "risk_flags": [],
+      "trace": [
+        {
+          "node": "sanitize_and_guard",
+          "started_at": "2026-10-08T12:13:01.718088+00:00",
+          "duration_ms": 130.12,
+          "summary": {
+            "pii_masked": 0,
+            "urls_defanged": 0,
+            "flags": [],
+            "has_regex_high": false,
+            "guard_score": 0.0006,
+            "guard_tier": "CLEAN",
+            "detector_mode": "model",
+            "detector_version": "meta-llama/Llama-Prompt-Guard-2-86M@a8ded8e697ce7c355e395a0df51f94adb4a2fd27",
+            "route_decision": "PROCEED_TO_LAYA"
+          },
+          "error": null
+        },
+        {
+          "node": "route_with_laya",
+          "started_at": "2026-10-08T12:13:01.849047+00:00",
+          "duration_ms": 1044.74,
+          "summary": {
+            "category": "other",
+            "category_conf": 0.3011,
+            "urgency": "high",
+            "urgency_conf": 0.6888,
+            "team": "general support"
+          },
+          "error": null
+        }
+      ]
+    }
+  ]
+}

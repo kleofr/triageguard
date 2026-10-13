@@ -1,0 +1,39 @@
+# Python caches and environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+.pytest_cache/
+
+# Large ML model cache & weights
+models/huggingface/
+.cache/
+
+# Node / Frontend
+node_modules/
+frontend/dist/
+.vite/
+
+# Framesmith MCP UI
+.framesmith/
+
+# Evaluation Reports & Dumps
+eval/reports/
+
+# Tests & Test Datasets
+tests/
+backend/tests/
+
+# Environment variables & secrets
+.env
+.env.*
+.env.local
+!.env.example
+frontend/DESIGN.md
+docs/perf.md
+docs/supabase_integration.md
+docs/triageguard_execution_flow.md

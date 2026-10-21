@@ -61,7 +61,7 @@ class OpenRouterDraftingService:
             try:
                 self.client = OpenRouter(
                     api_key=self.api_key,
-                    http_referer="https://github.com/triageguard",
+                    http_referer="https://github.com/kleofr/triageguard",
                     x_open_router_title="TriageGuard Customer Support",
                 )
             except Exception as exc:
